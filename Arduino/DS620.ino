@@ -16,12 +16,12 @@ void setup()
 	// Initialise Serial Communication, set  baud rate = 9600
 	Serial.begin(9600);
 
-  // Start I2C Transmission
-  Wire.beginTransmission(Addr);
-  // Select start command
-  Wire.write(0x51);
-  // Stop I2C Transmission
-  Wire.endTransmission();
+  	// Start I2C Transmission
+  	Wire.beginTransmission(Addr);
+  	// Select start command
+  	Wire.write(0x51);
+  	// Stop I2C Transmission
+  	Wire.endTransmission();
 
 	// Start I2C Transmission
 	Wire.beginTransmission(Addr);
@@ -46,7 +46,7 @@ void setup()
 
 void loop()
 {
-  unsigned int data[2];
+  	unsigned int data[2];
 	// Start I2C Transmission
 	Wire.beginTransmission(Addr);
 	// Select data register
@@ -65,22 +65,21 @@ void loop()
 		data[1] = Wire.read();
 	}
 		
-  // Convert the data 
-  int temp = (data[0] * 256 + (data[1] & 0xF8)) / 8;
-  if(temp > 4095)
-	{
+  	// Convert the data 
+  	int temp = (data[0] * 256 + (data[1] & 0xF8)) / 8;
+  	if(temp > 4095)
+		{
 			temp -= 8192; 
-	}
-  float cTemp = (temp) * 0.0625;  
-  float fTemp = (cTemp * 1.8 ) + 32;
+		}
+  	float cTemp = (temp) * 0.0625;  
+  	float fTemp = (cTemp * 1.8 ) + 32;
   
-  // Output data to serial monitor
-  Serial.print("Temperature in Celsius :  ");
-  Serial.print(cTemp);  
-  Serial.println(" C");
-  Serial.print("Temperature in Farhenheit :  ");
-  Serial.print(fTemp);
-  Serial.println(" F"); 
+  	// Output data to serial monitor
+  	Serial.print("Temperature in Celsius :  ");
+  	Serial.print(cTemp);  
+  	Serial.println(" C");
+  	Serial.print("Temperature in Farhenheit :  ");
+  	Serial.print(fTemp);
+  	Serial.println(" F"); 
 	delay(1000);
 }
-
